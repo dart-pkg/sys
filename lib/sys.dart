@@ -38,6 +38,10 @@ String pathBaseName(String $path) {
   return path.basenameWithoutExtension($path);
 }
 
+String pathExtension(String $path) {
+  return path.extension($path);
+}
+
 List<String> pathFiles(String $path) {
   final $dir = io.Directory(path.join($path));
   final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
