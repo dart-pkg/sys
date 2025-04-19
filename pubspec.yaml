@@ -1,6 +1,6 @@
 name: sys
-description: "sys package project"
-version: 0.0.5
+description: sys package project
+version: 2025.420.434
 homepage:
 repository: https://github.com/dart-pkg/sys
 
@@ -8,9 +8,11 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
-  output: ^1.0.0
   path: ^1.9.1
 
 dev_dependencies:
+  build_runner: ^2.4.15
+  embed: ^1.4.1
   lints: ^5.1.1
+  output: ^1.0.1
   test: ^1.25.15
