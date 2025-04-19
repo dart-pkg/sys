@@ -8,6 +8,8 @@ void main() {
     test('run1', () {
       dump(sys.pathBaseName('abc.xyz.exe'));
       dump(sys.pathExtension('abc.xyz.exe'));
+      dump(sys.pathFiles('xyz'));
+      dump(sys.pathDirectories('xyz'));
       // String home = sys.getenv('HOME')!;
       // echo(home, 'home');
       // String helloDir = path.join(home, 'dart', 'hello');

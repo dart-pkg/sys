@@ -1,3 +1,8 @@
+## 0.0.5
+
+- Modified pathFiles() and pathDirectories()
+
+
 ## 0.0.4
 
 - Added: pathExtension()

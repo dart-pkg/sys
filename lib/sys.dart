@@ -43,25 +43,33 @@ String pathExtension(String $path) {
 }
 
 List<String> pathFiles(String $path) {
-  final $dir = io.Directory(path.join($path));
-  final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
-  final Iterable<io.File> $files = $entities.whereType<io.File>();
-  List<String> result = [];
-  $files.toList().forEach((x) {
-    result.add(pathFullName(x.path));
-  });
-  return result;
+  try {
+    final $dir = io.Directory(path.join($path));
+    final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
+    final Iterable<io.File> $files = $entities.whereType<io.File>();
+    List<String> result = [];
+    $files.toList().forEach((x) {
+      result.add(pathFullName(x.path));
+    });
+    return result;
+  } catch ($e) {
+    return <String>[];
+  }
 }
 
 List<String> pathDirectories(String $path) {
-  final $dir = io.Directory(path.join($path));
-  final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
-  final Iterable<io.Directory> $dirs = $entities.whereType<io.Directory>();
-  List<String> result = [];
-  $dirs.toList().forEach((x) {
-    result.add(pathFullName(x.path));
-  });
-  return result;
+  try {
+    final $dir = io.Directory(path.join($path));
+    final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
+    final Iterable<io.Directory> $dirs = $entities.whereType<io.Directory>();
+    List<String> result = [];
+    $dirs.toList().forEach((x) {
+      result.add(pathFullName(x.path));
+    });
+    return result;
+  } catch ($e) {
+    return <String>[];
+  }
 }
 
 Uint8List readFileBytes(String $path) {
