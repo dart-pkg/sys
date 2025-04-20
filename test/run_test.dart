@@ -15,6 +15,9 @@ void main() {
       // String helloDir = path.join(home, 'dart', 'hello');
       // echo(helloDir, 'helloDir');
       // echo(sys.directoryExists(helloDir), 'sys.directoryExists(helloDir)');
+      echoJson(sys.pathFiles(r'D:\home11\pub\sys', true));
+      echoJson(sys.pathFiles(r'D:\home11\pub\sys'));
+      echoJson(sys.pathDirectories(r'D:\home11\pub\sys'));
     });
   });
 }

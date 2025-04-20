@@ -42,8 +42,26 @@ String pathExtension(String $path) {
   return path.extension($path);
 }
 
-List<String> pathFiles(String $path) {
+List<String> _getFilesFromDirRecursive(String $path) {
+  List<String> result = [];
+  io.Directory dir = io.Directory($path);
+  List<io.FileSystemEntity> entities = dir.listSync().toList();
+  for (var entity in entities) {
+    if (entity is io.File) {
+      result.add(pathFullName(entity.path));
+    } else if (entity is io.Directory){
+      result.addAll(_getFilesFromDirRecursive(pathFullName(entity.path)));
+    }
+  }
+  return result;
+}
+
+List<String> pathFiles(String $path, [bool? $recursive]) {
   try {
+    $recursive ??= false;
+    if ($recursive) {
+      return _getFilesFromDirRecursive($path).map(($x)=>$x.replaceAll(r'\', r'/')).toList();
+    }
     final $dir = io.Directory(path.join($path));
     final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
     final Iterable<io.File> $files = $entities.whereType<io.File>();
@@ -51,7 +69,7 @@ List<String> pathFiles(String $path) {
     $files.toList().forEach((x) {
       result.add(pathFullName(x.path));
     });
-    return result;
+    return result.map(($x)=>$x.replaceAll(r'\', r'/')).toList();
   } catch ($e) {
     return <String>[];
   }
@@ -66,7 +84,7 @@ List<String> pathDirectories(String $path) {
     $dirs.toList().forEach((x) {
       result.add(pathFullName(x.path));
     });
-    return result;
+    return result.map(($x)=>$x.replaceAll(r'\', r'/')).toList();
   } catch ($e) {
     return <String>[];
   }

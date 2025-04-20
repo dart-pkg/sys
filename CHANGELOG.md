@@ -21,3 +21,7 @@
 ## 2025.420.1441
 
 - Added version tag to GitHub repository
+
+## 2025.421.300
+
+- pathFiles() now accepts optional recursive flag: List<String> pathFiles(String path, [bool? recursive])
