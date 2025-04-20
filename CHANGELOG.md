@@ -17,3 +17,7 @@
 ## 0.0.5
 
 - Modified pathFiles() and pathDirectories()
+
+## 2025.420.1441
+
+- Added version tag to GitHub repository
