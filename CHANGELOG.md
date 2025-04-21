@@ -25,3 +25,7 @@
 ## 2025.421.300
 
 - pathFiles() now accepts optional recursive flag: List<String> pathFiles(String path, [bool? recursive])
+
+## 2025.421.938
+
+- Added: httpGetBodyAsync()

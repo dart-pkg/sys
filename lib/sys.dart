@@ -3,6 +3,7 @@ import 'dart:convert' as convert;
 import 'dart:io' as io;
 import 'dart:typed_data';
 import 'package:path/path.dart' as path;
+import 'package:http/http.dart' as http;
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -117,4 +118,17 @@ bool fileExists(String $path) {
 
 bool directoryExists(String $path) {
   return io.Directory($path).existsSync();
+}
+
+Future<String?> httpGetBodyAsync(String $urlString) async {
+  try {
+    var url = Uri.parse($urlString);
+    var response = await http.get(url);
+    if (response.statusCode != 200) {
+      return null;
+    }
+    return response.body;
+  } catch($e) {
+    return null;
+  }
 }

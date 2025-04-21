@@ -5,19 +5,16 @@ import 'package:sys/sys.dart' as sys;
 
 void main() {
   group('Run', () {
-    test('run1', () {
+    test('run1', () async {
       dump(sys.pathBaseName('abc.xyz.exe'));
       dump(sys.pathExtension('abc.xyz.exe'));
       dump(sys.pathFiles('xyz'));
       dump(sys.pathDirectories('xyz'));
-      // String home = sys.getenv('HOME')!;
-      // echo(home, 'home');
-      // String helloDir = path.join(home, 'dart', 'hello');
-      // echo(helloDir, 'helloDir');
-      // echo(sys.directoryExists(helloDir), 'sys.directoryExists(helloDir)');
-      echoJson(sys.pathFiles(r'D:\home11\pub\sys', true));
-      echoJson(sys.pathFiles(r'D:\home11\pub\sys'));
-      echoJson(sys.pathDirectories(r'D:\home11\pub\sys'));
+      // echoJson(sys.pathFiles(r'D:\home11\pub\sys', true));
+      // echoJson(sys.pathFiles(r'D:\home11\pub\sys'));
+      // echoJson(sys.pathDirectories(r'D:\home11\pub\sys'));
+      echo(await sys.httpGetBodyAsync('https://github.com/dart-pkg/winsys/raw/main/README.md'));
+      echo(await sys.httpGetBodyAsync('https://github.com/dart-pkg/not-exist/raw/main/README.md'));
     });
   });
 }
