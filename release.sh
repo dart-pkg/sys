@@ -10,6 +10,8 @@ echo $version
 
 pubspec "$version"
 
+dart format .
+
 cat << EOS >> CHANGELOG.md
 
 ## $version

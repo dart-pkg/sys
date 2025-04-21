@@ -4,6 +4,10 @@ import 'dart:io' as io;
 import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
+import 'package:process_run/shell.dart' as pr;
+//import 'package:dynamic_function/dynamic_function.dart';
+
+final _$shell = pr.Shell();
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -50,7 +54,7 @@ List<String> _getFilesFromDirRecursive(String $path) {
   for (var entity in entities) {
     if (entity is io.File) {
       result.add(pathFullName(entity.path));
-    } else if (entity is io.Directory){
+    } else if (entity is io.Directory) {
       result.addAll(_getFilesFromDirRecursive(pathFullName(entity.path)));
     }
   }
@@ -61,7 +65,9 @@ List<String> pathFiles(String $path, [bool? $recursive]) {
   try {
     $recursive ??= false;
     if ($recursive) {
-      return _getFilesFromDirRecursive($path).map(($x)=>$x.replaceAll(r'\', r'/')).toList();
+      return _getFilesFromDirRecursive(
+        $path,
+      ).map(($x) => $x.replaceAll(r'\', r'/')).toList();
     }
     final $dir = io.Directory(path.join($path));
     final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
@@ -70,7 +76,7 @@ List<String> pathFiles(String $path, [bool? $recursive]) {
     $files.toList().forEach((x) {
       result.add(pathFullName(x.path));
     });
-    return result.map(($x)=>$x.replaceAll(r'\', r'/')).toList();
+    return result.map(($x) => $x.replaceAll(r'\', r'/')).toList();
   } catch ($e) {
     return <String>[];
   }
@@ -85,7 +91,7 @@ List<String> pathDirectories(String $path) {
     $dirs.toList().forEach((x) {
       result.add(pathFullName(x.path));
     });
-    return result.map(($x)=>$x.replaceAll(r'\', r'/')).toList();
+    return result.map(($x) => $x.replaceAll(r'\', r'/')).toList();
   } catch ($e) {
     return <String>[];
   }
@@ -128,7 +134,47 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
       return null;
     }
     return response.body;
-  } catch($e) {
+  } catch ($e) {
     return null;
   }
 }
+
+Future<List<io.ProcessResult>> runAsync(
+  List<String> $command, [
+  List<String>? $rest,
+]) async {
+  String $commandLine = $command[0];
+  for (int i = 1; i < $command.length; i++) {
+    $commandLine += ' "${$command[i]}"';
+  }
+  if ($rest != null) {
+    for (int i = 0; i < $rest.length; i++) {
+      $commandLine += ' "${$rest[i]}"';
+    }
+  }
+  return _$shell.run($commandLine);
+}
+
+// final dynamic run$ = DynamicFunction((
+//     List<dynamic> $positional,
+//     Map<Symbol, dynamic> $named,
+//     ) {
+//   if ($positional.isEmpty) {
+//     throw '${$positional.length} arguments supplied to command\$()';
+//   }
+//   dynamic $cmd = $positional[0];
+//   List<String> $cmdArgs = <String>[];
+//   for (int $i = 1; $i < $positional.length; $i++) {
+//     $cmdArgs.add($positional[$i]);
+//   }
+//   checkNamed($named, ['rest']);
+//   List<String> $rest =
+//   ($named[Symbol('rest')] == null)
+//       ? <String>[]
+//       : $named[Symbol('rest')] as List<String>;
+//   for (int $i=0; $i<$rest.length; $i++) {
+//     $cmdArgs.add($rest[$i]);
+//   }
+//   run($cmd, $cmdArgs);
+//   return null;
+// });

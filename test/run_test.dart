@@ -13,8 +13,17 @@ void main() {
       // echoJson(sys.pathFiles(r'D:\home11\pub\sys', true));
       // echoJson(sys.pathFiles(r'D:\home11\pub\sys'));
       // echoJson(sys.pathDirectories(r'D:\home11\pub\sys'));
-      echo(await sys.httpGetBodyAsync('https://github.com/dart-pkg/winsys/raw/main/README.md'));
-      echo(await sys.httpGetBodyAsync('https://github.com/dart-pkg/not-exist/raw/main/README.md'));
+      echo(
+        await sys.httpGetBodyAsync(
+          'https://github.com/dart-pkg/winsys/raw/main/README.md',
+        ),
+      );
+      echo(
+        await sys.httpGetBodyAsync(
+          'https://github.com/dart-pkg/not-exist/raw/main/README.md',
+        ),
+      );
+      await sys.runAsync(['ping', '-n'], ['2', 'www.youtube.com']);
     });
   });
 }

@@ -29,3 +29,7 @@
 ## 2025.421.938
 
 - Added: httpGetBodyAsync()
+
+## 2025.421.2149
+
+- Added: runAsync()
