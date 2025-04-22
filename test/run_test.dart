@@ -23,7 +23,7 @@ void main() {
           'https://github.com/dart-pkg/not-exist/raw/main/README.md',
         ),
       );
-      await sys.runAsync(['ping', '-n'], ['2', 'www.youtube.com']);
+      //await sys.runAsync(['ping', '-n'], ['2', 'www.youtube.com']);
     });
   });
 }

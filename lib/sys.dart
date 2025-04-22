@@ -7,7 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:process_run/shell.dart' as pr;
 //import 'package:dynamic_function/dynamic_function.dart';
 
-final _$shell = pr.Shell();
+final _$shell = pr.Shell(
+  stdoutEncoding: convert.utf8,
+  stderrEncoding: convert.utf8,
+);
 
 bool get isInDebugMode {
   bool inDebugMode = false;

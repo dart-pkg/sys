@@ -33,3 +33,7 @@
 ## 2025.421.2149
 
 - Added: runAsync()
+
+## 2025.422.2227
+
+- sys.dart: final _ = pr.Shell(stdoutEncoding: convert.utf8, stderrEncoding: convert.utf8);
