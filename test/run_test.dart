@@ -24,17 +24,21 @@ void main() {
         ),
       );
       //await sys.runAsync(['cmd.exe', '/c'], rest: ['dir', '/w']);
-      await sys.runAsync([
-        'dart',
-        'pub',
-        'deps',
-        '--no-dev',
-        '--style',
-        'list',
-        '|',
-        'sed',
-        '"/^ .*/d"',
-      ], useBash: true);
+      // await sys.runAsync$([
+      //   'dart',
+      //   'pub',
+      //   'deps',
+      //   '--no-dev',
+      //   '--style',
+      //   'list',
+      //   '|',
+      //   'sed',
+      //   '"/^ .*/d"',
+      // ], useBash: true);
+      await sys.runAsync(
+        'dart pub deps --no-dev --style list | sed "/^ .*/d"',
+        useBash: true,
+      );
     });
   });
 }

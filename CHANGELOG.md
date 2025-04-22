@@ -41,3 +41,7 @@
 ## 2025.422.2335
 
 - sys.runAsync() now accepts optional named parameter useBash
+
+## 2025.422.2341
+
+- Introduced runAsync() and runAsync$()

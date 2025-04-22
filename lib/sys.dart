@@ -144,7 +144,17 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
   }
 }
 
-Future<List<io.ProcessResult>> runAsync(
+Future<List<io.ProcessResult>> runAsync(String command, {bool? useBash}) async {
+  String $commandLine = command;
+  useBash ??= false;
+  if (useBash) {
+    $commandLine = "bash -c '${$commandLine}'";
+  }
+  print('${getCwd()}>${$commandLine}');
+  return _$shell.run($commandLine);
+}
+
+Future<List<io.ProcessResult>> runAsync$(
   List<String> command, {
   List<String>? rest,
   bool? useBash,
@@ -155,12 +165,7 @@ Future<List<io.ProcessResult>> runAsync(
     ..addAll(command)
     ..addAll(rest);
   String $commandLine = misc.makeCommandLine($list);
-  useBash ??= false;
-  if (useBash) {
-    $commandLine = "bash -c '${$commandLine}'";
-  }
-  print('${getCwd()}>${$commandLine}');
-  return _$shell.run($commandLine);
+  return runAsync($commandLine, useBash: useBash);
 }
 
 // final dynamic run$ = DynamicFunction((
