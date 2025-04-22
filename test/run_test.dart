@@ -23,7 +23,18 @@ void main() {
           'https://github.com/dart-pkg/not-exist/raw/main/README.md',
         ),
       );
-      //await sys.runAsync(['ping', '-n'], ['2', 'www.youtube.com']);
+      //await sys.runAsync(['cmd.exe', '/c'], rest: ['dir', '/w']);
+      await sys.runAsync([
+        'dart',
+        'pub',
+        'deps',
+        '--no-dev',
+        '--style',
+        'list',
+        '|',
+        'sed',
+        '"/^ .*/d"',
+      ], useBash: true);
     });
   });
 }

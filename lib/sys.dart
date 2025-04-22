@@ -5,7 +5,9 @@ import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
 import 'package:process_run/shell.dart' as pr;
+
 //import 'package:dynamic_function/dynamic_function.dart';
+import 'package:misc/misc.dart' as misc;
 
 final _$shell = pr.Shell(
   stdoutEncoding: convert.utf8,
@@ -143,18 +145,21 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
 }
 
 Future<List<io.ProcessResult>> runAsync(
-  List<String> $command, [
-  List<String>? $rest,
-]) async {
-  String $commandLine = $command[0];
-  for (int i = 1; i < $command.length; i++) {
-    $commandLine += ' "${$command[i]}"';
+  List<String> command, {
+  List<String>? rest,
+  bool? useBash,
+}) async {
+  var $list = <String>[];
+  rest ??= <String>[];
+  $list
+    ..addAll(command)
+    ..addAll(rest);
+  String $commandLine = misc.makeCommandLine($list);
+  useBash ??= false;
+  if (useBash) {
+    $commandLine = "bash -c '${$commandLine}'";
   }
-  if ($rest != null) {
-    for (int i = 0; i < $rest.length; i++) {
-      $commandLine += ' "${$rest[i]}"';
-    }
-  }
+  print('${getCwd()}>${$commandLine}');
   return _$shell.run($commandLine);
 }
 
