@@ -45,3 +45,7 @@
 ## 2025.422.2341
 
 - Introduced runAsync() and runAsync$()
+
+## 2025.424.246
+
+- Removed dependency to process_run and introduced dependency to run package

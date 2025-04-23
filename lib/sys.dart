@@ -4,15 +4,13 @@ import 'dart:io' as io;
 import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-import 'package:process_run/shell.dart' as pr;
+//import 'package:process_run/shell.dart' as pr;
+import 'package:run/run.dart' as run;
 
-//import 'package:dynamic_function/dynamic_function.dart';
-import 'package:misc/misc.dart' as misc;
-
-final _$shell = pr.Shell(
-  stdoutEncoding: convert.utf8,
-  stderrEncoding: convert.utf8,
-);
+// final _$shell = pr.Shell(
+//   stdoutEncoding: convert.utf8,
+//   stderrEncoding: convert.utf8,
+// );
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -144,50 +142,24 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
   }
 }
 
-Future<List<io.ProcessResult>> runAsync(String command, {bool? useBash}) async {
-  String $commandLine = command;
-  useBash ??= false;
-  if (useBash) {
-    $commandLine = "bash -c '${$commandLine}'";
-  }
-  print('${getCwd()}>${$commandLine}');
-  return _$shell.run($commandLine);
+Future<String> runAsync(String command, {bool useBash = false}) async {
+  final $run = run.Run(useUnixShell: useBash);
+  return $run.$(command);
 }
 
-Future<List<io.ProcessResult>> runAsync$(
+Future<String> runAsync$(
   List<String> command, {
   List<String>? rest,
-  bool? useBash,
+  bool autoQuote = true,
+  bool useBash = false,
 }) async {
   var $list = <String>[];
   rest ??= <String>[];
   $list
     ..addAll(command)
     ..addAll(rest);
-  String $commandLine = misc.makeCommandLine($list);
-  return runAsync($commandLine, useBash: useBash);
+  String $executable = $list[0];
+  List<String> $arguments = $list.sublist(1).toList();
+  final $run = run.Run(useUnixShell: useBash);
+  return $run.$$($executable, arguments: $arguments, autoQuote: autoQuote);
 }
-
-// final dynamic run$ = DynamicFunction((
-//     List<dynamic> $positional,
-//     Map<Symbol, dynamic> $named,
-//     ) {
-//   if ($positional.isEmpty) {
-//     throw '${$positional.length} arguments supplied to command\$()';
-//   }
-//   dynamic $cmd = $positional[0];
-//   List<String> $cmdArgs = <String>[];
-//   for (int $i = 1; $i < $positional.length; $i++) {
-//     $cmdArgs.add($positional[$i]);
-//   }
-//   checkNamed($named, ['rest']);
-//   List<String> $rest =
-//   ($named[Symbol('rest')] == null)
-//       ? <String>[]
-//       : $named[Symbol('rest')] as List<String>;
-//   for (int $i=0; $i<$rest.length; $i++) {
-//     $cmdArgs.add($rest[$i]);
-//   }
-//   run($cmd, $cmdArgs);
-//   return null;
-// });

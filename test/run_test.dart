@@ -23,22 +23,26 @@ void main() {
           'https://github.com/dart-pkg/not-exist/raw/main/README.md',
         ),
       );
-      //await sys.runAsync(['cmd.exe', '/c'], rest: ['dir', '/w']);
-      // await sys.runAsync$([
-      //   'dart',
-      //   'pub',
-      //   'deps',
-      //   '--no-dev',
-      //   '--style',
-      //   'list',
-      //   '|',
-      //   'sed',
-      //   '"/^ .*/d"',
-      // ], useBash: true);
-      await sys.runAsync(
-        'dart pub deps --no-dev --style list | sed "/^ .*/d"',
+      //await sys.runAsync('dir /w');
+      await sys.runAsync$(
+        [
+          'dart',
+          'pub',
+          'deps',
+          '--no-dev',
+          '--style',
+          'list',
+          '|',
+          'sed',
+          '"/^ .*/d"',
+        ],
         useBash: true,
+        autoQuote: false,
       );
+      // await sys.runAsync(
+      //   'dart pub deps --no-dev --style list | sed "/^ .*/d"',
+      //   useBash: true,
+      // );
     });
   });
 }
