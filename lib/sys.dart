@@ -142,12 +142,12 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
   }
 }
 
-Future<String> runAsync(String command, {bool useBash = false}) async {
+Future<dynamic> runAsync(String command, {bool useBash = false}) async {
   final $run = run.Run(useUnixShell: useBash);
   return $run.$(command);
 }
 
-Future<String> runAsync$(
+Future<dynamic> runAsync$(
   List<String> command, {
   List<String>? rest,
   bool autoQuote = true,
