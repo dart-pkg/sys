@@ -18,11 +18,11 @@ String? getenv(String $name) {
 }
 
 void setCwd(String $path) {
-  io.Directory.current = $path;
+  io.Directory.current = pathFullName($path);
 }
 
 String getCwd() {
-  return io.Directory.current.absolute.path;
+  return pathFullName(io.Directory.current.absolute.path);
 }
 
 String pathFullName(String $path) {
@@ -30,7 +30,7 @@ String pathFullName(String $path) {
 }
 
 String pathDirectoryName(String $path) {
-  return path.dirname($path);
+  return pathFullName(path.dirname($path));
 }
 
 String pathFileName(String $path) {
@@ -204,7 +204,7 @@ String timeBasedVersionString() {
   String day = lastChars('0${now.day}', 2);
   String hour = lastChars('0${now.hour}', 2);
   String minute = lastChars('0${now.minute}', 2);
-  String version = '$year.${month}${day}.${hour}${minute}';
+  String version = '$year.$month$day.$hour$minute';
   version = _adjustVersionString(version);
   return version;
 }

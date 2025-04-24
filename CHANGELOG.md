@@ -65,3 +65,7 @@
 ## 2025.424.1853
 
 - Removed dependency to run package
+
+## 2025.425.243
+
+- Modified pathDirectoryName()
