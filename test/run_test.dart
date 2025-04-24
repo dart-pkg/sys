@@ -24,7 +24,7 @@ void main() {
         ),
       );
       //await sys.runAsync('dir /w');
-      await sys.runAsync$(
+      int code = await sys.runAsync$(
         [
           'dart',
           'pub',
@@ -36,9 +36,11 @@ void main() {
           'sed',
           '"/^ .*/d"',
         ],
+        returnCode: true,
         useBash: true,
         autoQuote: false,
       );
+      echo(code, 'code');
       // await sys.runAsync(
       //   'dart pub deps --no-dev --style list | sed "/^ .*/d"',
       //   useBash: true,

@@ -4,6 +4,7 @@ import 'dart:io' as io;
 import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
+
 //import 'package:process_run/shell.dart' as pr;
 import 'package:run/run.dart' as run;
 
@@ -142,16 +143,21 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
   }
 }
 
-Future<dynamic> runAsync(String command, {bool useBash = false}) async {
+Future<dynamic> runAsync(
+  String command, {
+  bool returnCode = false,
+  bool useBash = false,
+}) async {
   final $run = run.Run(useUnixShell: useBash);
-  return $run.$(command);
+  return $run.$(command, returnCode: returnCode);
 }
 
 Future<dynamic> runAsync$(
   List<String> command, {
   List<String>? rest,
-  bool autoQuote = true,
+  bool returnCode = false,
   bool useBash = false,
+  bool autoQuote = true,
 }) async {
   var $list = <String>[];
   rest ??= <String>[];
@@ -161,5 +167,10 @@ Future<dynamic> runAsync$(
   String $executable = $list[0];
   List<String> $arguments = $list.sublist(1).toList();
   final $run = run.Run(useUnixShell: useBash);
-  return $run.$$($executable, arguments: $arguments, autoQuote: autoQuote);
+  return $run.$$(
+    $executable,
+    arguments: $arguments,
+    returnCode: returnCode,
+    autoQuote: autoQuote,
+  );
 }

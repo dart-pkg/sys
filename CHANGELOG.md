@@ -53,3 +53,7 @@
 ## 2025.424.1510
 
 - Follows function signature change of run package
+
+## 2025.424.1524
+
+- Added returnCode named parameter to runAsync() and runAsync$()
