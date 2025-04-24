@@ -57,3 +57,7 @@
 ## 2025.424.1524
 
 - Added returnCode named parameter to runAsync() and runAsync$()
+
+## 2025.424.1611
+
+- Added: timeBasedVersionString()

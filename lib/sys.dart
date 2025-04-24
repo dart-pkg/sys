@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:convert' as convert;
 import 'dart:io' as io;
 import 'dart:typed_data';
+import 'package:intl/intl.dart' as intl;
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
 
@@ -173,4 +174,34 @@ Future<dynamic> runAsync$(
     returnCode: returnCode,
     autoQuote: autoQuote,
   );
+}
+
+String _adjustVersionString(String $s) {
+  List<String> $split = $s.split('.');
+  List<String> $result = <String>[];
+  for (int i = 0; i < $split.length; i++) {
+    String $part = $split[i];
+    String $part2 = '';
+    bool isBeggining = true;
+    for (int j = 0; j < $part.length; j++) {
+      if (!isBeggining || (j == $part.length - 1)) {
+        $part2 += $part[j];
+      } else {
+        if ($part[j] != '0') {
+          $part2 += $part[j];
+          isBeggining = false;
+        }
+      }
+    }
+    $result.add($part2);
+  }
+  return $result.join('.');
+}
+
+String timeBasedVersionString() {
+  final now = DateTime.now();
+  final formatter1 = intl.DateFormat('yyyy.MMdd.HHmm');
+  String version = formatter1.format(now);
+  version = _adjustVersionString(version);
+  return version;
 }

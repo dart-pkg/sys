@@ -45,6 +45,7 @@ void main() {
       //   'dart pub deps --no-dev --style list | sed "/^ .*/d"',
       //   useBash: true,
       // );
+      echo(sys.timeBasedVersionString());
     });
   });
 }
