@@ -2,7 +2,7 @@ import 'dart:core';
 import 'dart:convert' as convert;
 import 'dart:io' as io;
 import 'dart:typed_data';
-import 'package:intl/intl.dart' as intl;
+//import 'package:intl/intl.dart' as intl;
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
 import 'package:std/command_runner.dart' as run;
@@ -191,10 +191,20 @@ String _adjustVersionString(String $s) {
   return $result.join('.');
 }
 
+String lastChars(String s, int len) {
+  return s.substring(s.length - len);
+}
+
 String timeBasedVersionString() {
   final now = DateTime.now();
-  final formatter1 = intl.DateFormat('yyyy.MMdd.HHmm');
-  String version = formatter1.format(now);
+  // final formatter1 = intl.DateFormat('yyyy.MMdd.HHmm');
+  // String version = formatter1.format(now);
+  String year = '${now.year}';
+  String month = lastChars('0${now.month}', 2);
+  String day = lastChars('0${now.day}', 2);
+  String hour = lastChars('0${now.hour}', 2);
+  String minute = lastChars('0${now.minute}', 2);
+  String version = '$year.${month}${day}.${hour}${minute}';
   version = _adjustVersionString(version);
   return version;
 }
