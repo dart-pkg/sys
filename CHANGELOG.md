@@ -61,3 +61,7 @@
 ## 2025.424.1611
 
 - Added: timeBasedVersionString()
+
+## 2025.424.1853
+
+- Removed dependency to run package

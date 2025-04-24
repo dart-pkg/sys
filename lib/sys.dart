@@ -5,14 +5,7 @@ import 'dart:typed_data';
 import 'package:intl/intl.dart' as intl;
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-
-//import 'package:process_run/shell.dart' as pr;
-import 'package:run/run.dart' as run;
-
-// final _$shell = pr.Shell(
-//   stdoutEncoding: convert.utf8,
-//   stderrEncoding: convert.utf8,
-// );
+import 'package:std/command_runner.dart' as run;
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -149,8 +142,8 @@ Future<dynamic> runAsync(
   bool returnCode = false,
   bool useBash = false,
 }) async {
-  final $run = run.Run(useUnixShell: useBash);
-  return $run.$(command, returnCode: returnCode);
+  final $run = run.CommandRunner(useUnixShell: useBash);
+  return $run.run(command, returnCode: returnCode);
 }
 
 Future<dynamic> runAsync$(
@@ -167,8 +160,8 @@ Future<dynamic> runAsync$(
     ..addAll(rest);
   String $executable = $list[0];
   List<String> $arguments = $list.sublist(1).toList();
-  final $run = run.Run(useUnixShell: useBash);
-  return $run.$$(
+  final $run = run.CommandRunner(useUnixShell: useBash);
+  return $run.run$(
     $executable,
     arguments: $arguments,
     returnCode: returnCode,
