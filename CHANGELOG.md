@@ -94,3 +94,16 @@
 -  output: ^1.0.7
 +  output: ^2025.426.2027
 ```
+
+## 2025.426.2256
+
+- Followed change of std:CommandRunner.run$() signature
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.426.2033
++version: 2025.426.2256
+-  std: ^2025.426.1637
++  std: ^2025.426.2248
+```

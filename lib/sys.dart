@@ -4,19 +4,16 @@ import 'dart:io' as io__;
 import 'dart:typed_data';
 import 'package:path/path.dart' as path__;
 import 'package:http/http.dart' as http__;
-import 'package:std/command_runner.dart' as std__;
-import 'package:std/misc.dart' as std__;
+// import 'package:std/command_runner.dart' as std__;
+// import 'package:std/misc.dart' as std__;
+import 'package:std/std.dart' as std__;
 import 'package:archive/archive.dart' as archive__;
 
 bool get isInDebugMode {
-  // bool inDebugMode = false;
-  // assert(inDebugMode = true);
-  // return inDebugMode;
   return std__.isInDebugMode;
 }
 
 String? getenv(String name) {
-  // return io__.Platform.environment[$name];
   return std__.getenv(name);
 }
 
@@ -100,50 +97,34 @@ List<String> pathDirectories(String $path) {
 }
 
 Uint8List readFileBytes(String path) {
-  // final $file = io__.File($path);
-  // return $file.readAsBytesSync();
   return std__.readFileBytes(path);
 }
 
 String readFileString(String path) {
-  // final $file = io__.File($path);
-  // return $file.readAsStringSync();
   return std__.readFileString(path);
 }
 
 List<String> readFileLines(String path) {
-  // final $file = io__.File($path);
-  // return $file.readAsLinesSync();
   return std__.readFileLines(path);
 }
 
 void writeFileBytes(String path, Uint8List data) {
-  // io__.File($path)
-  //   ..createSync(recursive: true)
-  //   ..writeAsBytesSync($data.toList());
   std__.writeFileBytes(path, data);
 }
 
 void writeFileString(String path, String data) {
-  // $data = std__.adjustTextNewlines($data);
-  // writeFileBytes($path, convert__.utf8.encode($data));
   std__.writeFileString(path, data);
 }
 
 List<String> textToLines(String s) {
-  // const $splitter = convert__.LineSplitter();
-  // final $lines = $splitter.convert($s);
-  // return $lines;
   return std__.textToLines(s);
 }
 
 bool fileExists(String path) {
-  // return io__.File($path).existsSync();
   return std__.fileExists(path);
 }
 
 bool directoryExists(String path) {
-  // return io__.Directory($path).existsSync();
   return std__.directoryExists(path);
 }
 
@@ -176,43 +157,22 @@ Future<dynamic> runAsync$(
   bool useBash = false,
   bool autoQuote = true,
 }) async {
-  var $list = <String>[];
+  var list = <String>[];
   rest ??= <String>[];
-  $list
+  list
     ..addAll(command)
     ..addAll(rest);
-  String $executable = $list[0];
-  List<String> $arguments = $list.sublist(1).toList();
+  // String $executable = $list[0];
+  // List<String> $arguments = $list.sublist(1).toList();
   final $run = std__.CommandRunner(useUnixShell: useBash);
   return $run.run$(
-    $executable,
-    arguments: $arguments,
+    // $executable,
+    // arguments: $arguments,
+    list,
     returnCode: returnCode,
     autoQuote: autoQuote,
   );
 }
-
-// String _adjustVersionString(String $s) {
-//   List<String> $split = $s.split('.');
-//   List<String> $result = <String>[];
-//   for (int i = 0; i < $split.length; i++) {
-//     String $part = $split[i];
-//     String $part2 = '';
-//     bool isBeggining = true;
-//     for (int j = 0; j < $part.length; j++) {
-//       if (!isBeggining || (j == $part.length - 1)) {
-//         $part2 += $part[j];
-//       } else {
-//         if ($part[j] != '0') {
-//           $part2 += $part[j];
-//           isBeggining = false;
-//         }
-//       }
-//     }
-//     $result.add($part2);
-//   }
-//   return $result.join('.');
-// }
 
 String lastChars(String s, int len) {
   // return s.substring(s.length - len);
@@ -220,24 +180,13 @@ String lastChars(String s, int len) {
 }
 
 String timeBasedVersionString() {
-  // final now = DateTime.now();
-  // // final formatter1 = intl.DateFormat('yyyy.MMdd.HHmm');
-  // // String version = formatter1.format(now);
-  // String year = '${now.year}';
-  // String month = lastChars('0${now.month}', 2);
-  // String day = lastChars('0${now.day}', 2);
-  // String hour = lastChars('0${now.hour}', 2);
-  // String minute = lastChars('0${now.minute}', 2);
-  // String version = '$year.$month$day.$hour$minute';
-  // version = _adjustVersionString(version);
-  // return version;
   return std__.timeBasedVersionString();
 }
 
-void unzipToDirectory(String $zipPath, String $destDir) {
-  $zipPath = pathFullName($zipPath);
-  $destDir = pathFullName($destDir);
-  final bytes = io__.File($zipPath).readAsBytesSync();
+void unzipToDirectory(String zipPath, String destDir) {
+  zipPath = pathFullName(zipPath);
+  destDir = pathFullName(destDir);
+  final bytes = io__.File(zipPath).readAsBytesSync();
   final archive = archive__.ZipDecoder().decodeBytes(bytes);
   for (final entry in archive) {
     if (entry.isFile) {
@@ -248,7 +197,7 @@ void unzipToDirectory(String $zipPath, String $destDir) {
         text = std__.adjustTextNewlines(text);
         fileBytes = convert__.utf8.encode(text);
       }
-      writeFileBytes('${$destDir}/${entry.name}', fileBytes);
+      writeFileBytes('$destDir/${entry.name}', fileBytes);
     }
   }
 }
