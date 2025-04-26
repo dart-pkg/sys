@@ -6,6 +6,8 @@ ts=`date "+%Y.%m%d.%H%M"`
 version=$(pkgver)
 comment=$1
 
+rm -rf tmp*
+
 echo $version
 
 pubspec "$version"

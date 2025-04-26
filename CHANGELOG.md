@@ -69,3 +69,7 @@
 ## 2025.425.243
 
 - Modified pathDirectoryName()
+
+## 2025.426.1427
+
+- Added: void writeFileBytes(String $path, Uint8List $data), void writeFileString(String $path, String $data) and void unzipToDirectory(String $zipPath, String $destDir)

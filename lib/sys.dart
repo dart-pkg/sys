@@ -1,11 +1,12 @@
 import 'dart:core';
-import 'dart:convert' as convert;
-import 'dart:io' as io;
+import 'dart:convert' as convert__;
+import 'dart:io' as io__;
 import 'dart:typed_data';
-//import 'package:intl/intl.dart' as intl;
-import 'package:path/path.dart' as path;
-import 'package:http/http.dart' as http;
-import 'package:std/command_runner.dart' as run;
+import 'package:path/path.dart' as path__;
+import 'package:http/http.dart' as http__;
+import 'package:std/command_runner.dart' as std__;
+import 'package:std/misc.dart' as std__;
+import 'package:archive/archive.dart' as archive__;
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -14,45 +15,45 @@ bool get isInDebugMode {
 }
 
 String? getenv(String $name) {
-  return io.Platform.environment[$name];
+  return io__.Platform.environment[$name];
 }
 
 void setCwd(String $path) {
-  io.Directory.current = pathFullName($path);
+  io__.Directory.current = pathFullName($path);
 }
 
 String getCwd() {
-  return pathFullName(io.Directory.current.absolute.path);
+  return pathFullName(io__.Directory.current.absolute.path);
 }
 
 String pathFullName(String $path) {
-  return path.normalize(path.absolute($path));
+  return path__.normalize(path__.absolute($path)).replaceAll(r'\', '/');
 }
 
 String pathDirectoryName(String $path) {
-  return pathFullName(path.dirname($path));
+  return pathFullName(path__.dirname($path));
 }
 
 String pathFileName(String $path) {
-  return path.basename($path);
+  return path__.basename($path);
 }
 
 String pathBaseName(String $path) {
-  return path.basenameWithoutExtension($path);
+  return path__.basenameWithoutExtension($path);
 }
 
 String pathExtension(String $path) {
-  return path.extension($path);
+  return path__.extension($path);
 }
 
 List<String> _getFilesFromDirRecursive(String $path) {
   List<String> result = [];
-  io.Directory dir = io.Directory($path);
-  List<io.FileSystemEntity> entities = dir.listSync().toList();
+  io__.Directory dir = io__.Directory($path);
+  List<io__.FileSystemEntity> entities = dir.listSync().toList();
   for (var entity in entities) {
-    if (entity is io.File) {
+    if (entity is io__.File) {
       result.add(pathFullName(entity.path));
-    } else if (entity is io.Directory) {
+    } else if (entity is io__.Directory) {
       result.addAll(_getFilesFromDirRecursive(pathFullName(entity.path)));
     }
   }
@@ -67,9 +68,9 @@ List<String> pathFiles(String $path, [bool? $recursive]) {
         $path,
       ).map(($x) => $x.replaceAll(r'\', r'/')).toList();
     }
-    final $dir = io.Directory(path.join($path));
-    final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
-    final Iterable<io.File> $files = $entities.whereType<io.File>();
+    final $dir = io__.Directory(path__.join($path));
+    final List<io__.FileSystemEntity> $entities = $dir.listSync().toList();
+    final Iterable<io__.File> $files = $entities.whereType<io__.File>();
     List<String> result = [];
     $files.toList().forEach((x) {
       result.add(pathFullName(x.path));
@@ -82,9 +83,10 @@ List<String> pathFiles(String $path, [bool? $recursive]) {
 
 List<String> pathDirectories(String $path) {
   try {
-    final $dir = io.Directory(path.join($path));
-    final List<io.FileSystemEntity> $entities = $dir.listSync().toList();
-    final Iterable<io.Directory> $dirs = $entities.whereType<io.Directory>();
+    final $dir = io__.Directory(path__.join($path));
+    final List<io__.FileSystemEntity> $entities = $dir.listSync().toList();
+    final Iterable<io__.Directory> $dirs =
+        $entities.whereType<io__.Directory>();
     List<String> result = [];
     $dirs.toList().forEach((x) {
       result.add(pathFullName(x.path));
@@ -96,38 +98,48 @@ List<String> pathDirectories(String $path) {
 }
 
 Uint8List readFileBytes(String $path) {
-  final $file = io.File($path);
+  final $file = io__.File($path);
   return $file.readAsBytesSync();
 }
 
 String readFileString(String $path) {
-  final $file = io.File($path);
+  final $file = io__.File($path);
   return $file.readAsStringSync();
 }
 
 List<String> readFileLines(String $path) {
-  final $file = io.File($path);
+  final $file = io__.File($path);
   return $file.readAsLinesSync();
 }
 
+void writeFileBytes(String $path, Uint8List $data) {
+  io__.File($path)
+    ..createSync(recursive: true)
+    ..writeAsBytesSync($data.toList());
+}
+
+void writeFileString(String $path, String $data) {
+  writeFileBytes($path, convert__.utf8.encode($data));
+}
+
 List<String> textToLines(String $s) {
-  const $splitter = convert.LineSplitter();
+  const $splitter = convert__.LineSplitter();
   final $lines = $splitter.convert($s);
   return $lines;
 }
 
 bool fileExists(String $path) {
-  return io.File($path).existsSync();
+  return io__.File($path).existsSync();
 }
 
 bool directoryExists(String $path) {
-  return io.Directory($path).existsSync();
+  return io__.Directory($path).existsSync();
 }
 
 Future<String?> httpGetBodyAsync(String $urlString) async {
   try {
     var url = Uri.parse($urlString);
-    var response = await http.get(url);
+    var response = await http__.get(url);
     if (response.statusCode != 200) {
       return null;
     }
@@ -142,7 +154,7 @@ Future<dynamic> runAsync(
   bool returnCode = false,
   bool useBash = false,
 }) async {
-  final $run = run.CommandRunner(useUnixShell: useBash);
+  final $run = std__.CommandRunner(useUnixShell: useBash);
   return $run.run(command, returnCode: returnCode);
 }
 
@@ -160,7 +172,7 @@ Future<dynamic> runAsync$(
     ..addAll(rest);
   String $executable = $list[0];
   List<String> $arguments = $list.sublist(1).toList();
-  final $run = run.CommandRunner(useUnixShell: useBash);
+  final $run = std__.CommandRunner(useUnixShell: useBash);
   return $run.run$(
     $executable,
     arguments: $arguments,
@@ -207,4 +219,24 @@ String timeBasedVersionString() {
   String version = '$year.$month$day.$hour$minute';
   version = _adjustVersionString(version);
   return version;
+}
+
+void unzipToDirectory(String $zipPath, String $destDir) {
+  $zipPath = pathFullName($zipPath);
+  $destDir = pathFullName($destDir);
+  final bytes = io__.File($zipPath).readAsBytesSync();
+  final archive = archive__.ZipDecoder().decodeBytes(bytes);
+  for (final entry in archive) {
+    if (entry.isFile) {
+      var fileBytes = entry.readBytes();
+      fileBytes = fileBytes!;
+      if (std__.isText(fileBytes)) {
+        String text = convert__.utf8.decode(fileBytes);
+        text = std__.adjustTextNewlines(text);
+        fileBytes = convert__.utf8.encode(text);
+      }
+      //print('${$destDir}/${entry.name}');
+      writeFileBytes('${$destDir}/${entry.name}', fileBytes);
+    }
+  }
 }
