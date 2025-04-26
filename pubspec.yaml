@@ -1,6 +1,6 @@
 name: "sys"
 description: "sys project"
-version: 2025.426.1725
+version: 2025.426.2033
 homepage: null
 repository: "https://github.com/dart-pkg/sys"
 environment:
@@ -12,5 +12,5 @@ dependencies:
   std: ^2025.426.1637
 dev_dependencies:
   lints: ^5.1.1
-  output: ^1.0.7
+  output: ^2025.426.2027
   test: ^1.25.15
