@@ -119,6 +119,7 @@ void writeFileBytes(String $path, Uint8List $data) {
 }
 
 void writeFileString(String $path, String $data) {
+  $data = std__.adjustTextNewlines($data);
   writeFileBytes($path, convert__.utf8.encode($data));
 }
 

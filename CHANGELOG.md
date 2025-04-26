@@ -73,3 +73,7 @@
 ## 2025.426.1427
 
 - Added: void writeFileBytes(String $path, Uint8List $data), void writeFileString(String $path, String $data) and void unzipToDirectory(String $zipPath, String $destDir)
+
+## 2025.426.1452
+
+- Modified so that writeFileString() calls std.adjustTextNewlines() before writing to file
