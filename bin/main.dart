@@ -1,3 +1,5 @@
+#! /usr/bin/env my-dart
+
 import 'package:sys/sys.dart' as sys__;
 
 // void unzipToDirectory(String $zipPath, String $destDir) {
