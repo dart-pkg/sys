@@ -107,3 +107,16 @@
 -  std: ^2025.426.1637
 +  std: ^2025.426.2248
 ```
+
+## 2025.427.1718
+
+- Update dependencies
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.426.2256
++version: 2025.427.1718
+-  std: ^2025.426.2248
++  std: ^2025.427.52
+```
