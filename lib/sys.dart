@@ -2,7 +2,7 @@ import 'dart:core';
 import 'dart:convert' as dart_conver;
 import 'dart:io' as dart_io;
 import 'dart:typed_data';
-import 'package:path/path.dart' as path_path;
+//import 'package:path/path.dart' as path_path;
 import 'package:http/http.dart' as http_http;
 import 'package:std/std.dart' as std_std;
 import 'package:archive/archive.dart' as archive_archive;
@@ -27,75 +27,32 @@ String getCwd() {
   return pathFullName(dart_io.Directory.current.absolute.path);
 }
 
-String pathFullName(String $path) {
-  return path_path.normalize(path_path.absolute($path)).replaceAll(r'\', '/');
+String pathFullName(String path) {
+  return std_std.pathFileName(path);
 }
 
-String pathDirectoryName(String $path) {
-  return pathFullName(path_path.dirname($path));
+String pathDirectoryName(String path) {
+  return std_std.pathDirectoryName(path);
 }
 
-String pathFileName(String $path) {
-  return path_path.basename($path);
+String pathFileName(String path) {
+  return std_std.pathFileName(path);
 }
 
-String pathBaseName(String $path) {
-  return path_path.basenameWithoutExtension($path);
+String pathBaseName(String path) {
+  return std_std.pathBaseName(path);
 }
 
-String pathExtension(String $path) {
-  return path_path.extension($path);
+String pathExtension(String path) {
+  return std_std.pathExtension(path);
 }
 
-List<String> _getFilesFromDirRecursive(String $path) {
-  List<String> result = [];
-  dart_io.Directory dir = dart_io.Directory($path);
-  List<dart_io.FileSystemEntity> entities = dir.listSync().toList();
-  for (var entity in entities) {
-    if (entity is dart_io.File) {
-      result.add(pathFullName(entity.path));
-    } else if (entity is dart_io.Directory) {
-      result.addAll(_getFilesFromDirRecursive(pathFullName(entity.path)));
-    }
-  }
-  return result;
+List<String> pathFiles(String path, [bool? recursive]) {
+  return std_std.pathFiles(path, recursive);
 }
 
-List<String> pathFiles(String $path, [bool? $recursive]) {
-  try {
-    $recursive ??= false;
-    if ($recursive) {
-      return _getFilesFromDirRecursive(
-        $path,
-      ).map(($x) => $x.replaceAll(r'\', r'/')).toList();
-    }
-    final $dir = dart_io.Directory(path_path.join($path));
-    final List<dart_io.FileSystemEntity> $entities = $dir.listSync().toList();
-    final Iterable<dart_io.File> $files = $entities.whereType<dart_io.File>();
-    List<String> result = [];
-    $files.toList().forEach((x) {
-      result.add(pathFullName(x.path));
-    });
-    return result.map(($x) => $x.replaceAll(r'\', r'/')).toList();
-  } catch ($e) {
-    return <String>[];
-  }
-}
-
-List<String> pathDirectories(String $path) {
-  try {
-    final $dir = dart_io.Directory(path_path.join($path));
-    final List<dart_io.FileSystemEntity> $entities = $dir.listSync().toList();
-    final Iterable<dart_io.Directory> $dirs =
-        $entities.whereType<dart_io.Directory>();
-    List<String> result = [];
-    $dirs.toList().forEach((x) {
-      result.add(pathFullName(x.path));
-    });
-    return result.map(($x) => $x.replaceAll(r'\', r'/')).toList();
-  } catch ($e) {
-    return <String>[];
-  }
+List<String> pathDirectories(String path) {
+  return std_std.pathDirectories(path);
 }
 
 Uint8List readFileBytes(String path) {
@@ -171,7 +128,6 @@ Future<dynamic> runAsync$(
 }
 
 String lastChars(String s, int len) {
-  // return s.substring(s.length - len);
   return std_std.lastChars(s, len);
 }
 
@@ -180,8 +136,8 @@ String timeBasedVersionString() {
 }
 
 void unzipToDirectory(String zipPath, String destDir) {
-  zipPath = pathFullName(zipPath);
-  destDir = pathFullName(destDir);
+  zipPath = pathFullName(std_std.pathExpand(zipPath));
+  destDir = pathFullName(std_std.pathExpand(destDir));
   final bytes = dart_io.File(zipPath).readAsBytesSync();
   final archive = archive_archive.ZipDecoder().decodeBytes(bytes);
   for (final entry in archive) {

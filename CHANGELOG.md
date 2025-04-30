@@ -159,3 +159,17 @@
 -  std: ^2025.430.1833
 +  std: ^2025.430.2012
 ```
+
+## 2025.430.2147
+
+- Moved function bodies of some functions to std package
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.430.2029
++version: 2025.430.2147
+-  path: ^1.9.1
+-  std: ^2025.430.2012
++  std: ^2025.430.2138
+```
