@@ -145,16 +145,18 @@ Future<String?> httpGetBodyAsync(String $urlString) async {
 
 Future<dynamic> runAsync(
   String command, {
+  dart_conver.Encoding? encoding,
   bool returnCode = false,
   bool useBash = false,
 }) async {
-  final $run = std_std.CommandRunner(useUnixShell: useBash);
+  final $run = std_std.CommandRunner(encoding: encoding, useUnixShell: useBash);
   return $run.run(command, returnCode: returnCode);
 }
 
 Future<dynamic> runAsync$(
   List<String> command, {
   List<String>? rest,
+  dart_conver.Encoding? encoding,
   bool returnCode = false,
   bool useBash = false,
   bool autoQuote = true,
@@ -164,16 +166,8 @@ Future<dynamic> runAsync$(
   list
     ..addAll(command)
     ..addAll(rest);
-  // String $executable = $list[0];
-  // List<String> $arguments = $list.sublist(1).toList();
-  final $run = std_std.CommandRunner(useUnixShell: useBash);
-  return $run.run$(
-    // $executable,
-    // arguments: $arguments,
-    list,
-    returnCode: returnCode,
-    autoQuote: autoQuote,
-  );
+  final $run = std_std.CommandRunner(encoding: encoding, useUnixShell: useBash);
+  return $run.run$(list, returnCode: returnCode, autoQuote: autoQuote);
 }
 
 String lastChars(String s, int len) {

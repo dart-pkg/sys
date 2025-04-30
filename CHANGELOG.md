@@ -146,3 +146,16 @@
 -  std: ^2025.428.1703
 +  std: ^2025.430.1833
 ```
+
+## 2025.430.2029
+
+- Modified: runAsync() and runAsync$()
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.430.1853
++version: 2025.430.2029
+-  std: ^2025.430.1833
++  std: ^2025.430.2012
+```
