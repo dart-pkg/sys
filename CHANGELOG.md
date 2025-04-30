@@ -173,3 +173,16 @@
 -  std: ^2025.430.2012
 +  std: ^2025.430.2138
 ```
+
+## 2025.501.850
+
+- Modified readFileString()
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.430.2147
++version: 2025.501.850
+-  std: ^2025.430.2138
++  std: ^2025.501.843
+```
