@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http_http;
 import 'package:std/std.dart' as std_std;
 import 'package:archive/archive.dart' as archive_archive;
-import 'package:debug_output/debug_output.dart';
+//import 'package:debug_output/debug_output.dart';
 
 // import 'package:crypto/crypto.dart' as crypto_crypto;
 // import 'package:uuid/uuid.dart' as uuid_uuid;
@@ -209,11 +209,8 @@ void unzipToDirectory(String zipPath, String destDir) {
 }
 
 void untarToDirectory(String tarPath, String destDir) {
-  echo(destDir, title: 'destDir(1)');
-  echo(std_std.pathExpand(destDir), title: r'std_std.pathExpand(destDir)');
   tarPath = pathFullName(std_std.pathExpand(tarPath));
   destDir = pathFullName(std_std.pathExpand(destDir));
-  echo(destDir, title: 'destDir(2)');
   final bytes = dart_io.File(tarPath).readAsBytesSync();
   final archive = archive_archive.TarDecoder().decodeBytes(bytes);
   for (final entry in archive) {
@@ -225,9 +222,6 @@ void untarToDirectory(String tarPath, String destDir) {
         text = std_std.adjustTextNewlines(text);
         fileBytes = dart_conver.utf8.encode(text);
       }
-      print(destDir);
-      print(entry.name);
-      print('$destDir/${entry.name}');
       writeFileBytes('$destDir/${entry.name}', fileBytes);
     }
   }
