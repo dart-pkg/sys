@@ -7,9 +7,6 @@ import 'package:std/std.dart' as std_std;
 import 'package:archive/archive.dart' as archive_archive;
 //import 'package:debug_output/debug_output.dart';
 
-// import 'package:crypto/crypto.dart' as crypto_crypto;
-// import 'package:uuid/uuid.dart' as uuid_uuid;
-
 bool get isInDebugMode {
   return std_std.isInDebugMode;
 }
@@ -22,12 +19,12 @@ String pathExpand(String path) {
   return std_std.pathExpand(path);
 }
 
-void setCwd(String $path) {
-  dart_io.Directory.current = pathFullName($path);
+void setCwd(String path) {
+  std_std.setCwd(path);
 }
 
 String getCwd() {
-  return pathFullName(dart_io.Directory.current.absolute.path);
+  return std_std.getCwd();
 }
 
 String pathFullName(String path) {
@@ -56,6 +53,10 @@ List<String> pathFiles(String path, [bool? recursive]) {
 
 List<String> pathDirectories(String path) {
   return std_std.pathDirectories(path);
+}
+
+void pathRename(String oldPath, String newPath) {
+  return std_std.pathRename(oldPath, newPath);
 }
 
 String get pathOfTempDir {

@@ -235,3 +235,16 @@
 -  path: ^1.9.1
 +  debug_output: ^2025.502.2007
 ```
+
+## 2025.502.2337
+
+- Update package dependencies
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.502.2257
++version: 2025.502.2337
+-  std: ^2025.502.2210
++  std: ^2025.502.2329
+```
