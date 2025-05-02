@@ -206,3 +206,18 @@
 -  output: ^2025.430.1731
 +  lints: ^5.1.1
 ```
+
+## 2025.502.2255
+
+- Fixed bug of pathFullName() not returning full path
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.502.2143
++version: 2025.502.2255
+-  crypto: ^3.0.6
+-  std: ^2025.502.2031
+-  uuid: ^4.5.1
++  std: ^2025.502.2210
+```
