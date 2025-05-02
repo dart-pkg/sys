@@ -224,10 +224,18 @@ Future<dynamic> runAsync$(
   return $run.run$(list, returnCode: returnCode, autoQuote: autoQuote);
 }
 
-void unzipToDirectory(String zipPath, String destDir) {
-  zipPath = pathFullName(std_std.pathExpand(zipPath));
-  destDir = pathFullName(std_std.pathExpand(destDir));
-  final bytes = dart_io.File(zipPath).readAsBytesSync();
+void unzipToDirectory(dynamic pathOrBytes, String destDir) {
+  Uint8List bytes;
+  if (pathOrBytes is String) {
+    String zipPath = pathOrBytes;
+    zipPath = pathFullName(std_std.pathExpand(zipPath));
+    destDir = pathFullName(std_std.pathExpand(destDir));
+    bytes = dart_io.File(zipPath).readAsBytesSync();
+  } else if (pathOrBytes is Uint8List) {
+    bytes = pathOrBytes;
+  } else {
+    throw ArgumentError();
+  }
   final archive = archive_archive.ZipDecoder().decodeBytes(bytes);
   for (final entry in archive) {
     if (entry.isFile) {
@@ -243,10 +251,18 @@ void unzipToDirectory(String zipPath, String destDir) {
   }
 }
 
-void untarToDirectory(String tarPath, String destDir) {
-  tarPath = pathFullName(std_std.pathExpand(tarPath));
-  destDir = pathFullName(std_std.pathExpand(destDir));
-  final bytes = dart_io.File(tarPath).readAsBytesSync();
+void untarToDirectory(dynamic pathOrBytes, String destDir) {
+  Uint8List bytes;
+  if (pathOrBytes is String) {
+    String zipPath = pathOrBytes;
+    zipPath = pathFullName(std_std.pathExpand(zipPath));
+    destDir = pathFullName(std_std.pathExpand(destDir));
+    bytes = dart_io.File(zipPath).readAsBytesSync();
+  } else if (pathOrBytes is Uint8List) {
+    bytes = pathOrBytes;
+  } else {
+    throw ArgumentError();
+  }
   final archive = archive_archive.TarDecoder().decodeBytes(bytes);
   for (final entry in archive) {
     if (entry.isFile) {

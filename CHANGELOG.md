@@ -272,3 +272,14 @@
 -version: 2025.503.6
 +version: 2025.503.56
 ```
+
+## 2025.503.117
+
+- Modified unzipToDirectory() and untarToDirectory() so that they accept both archive path and archive bytes for input
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.503.56
++version: 2025.503.117
+```

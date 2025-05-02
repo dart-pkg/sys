@@ -1,8 +1,11 @@
 #! /usr/bin/env my-dart
 
-import 'package:sys/sys.dart' as sys__;
+import 'package:sys/sys.dart';
 
 main() {
-  //sys__.unzipToDirectory('test.zip', 'tmp.out3/');
-  sys__.untarToDirectory('web.tar', 'tmp.tar/web');
+  unzipToDirectory('test.zip', 'tmp.out1/');
+  unzipToDirectory(readFileBytes('test.zip'), 'tmp.out2/');
+  //unzipToDirectory(123, 'tmp.out3/');
+  untarToDirectory('web.tar', 'tmp.out4');
+  untarToDirectory(readFileBytes('web.tar'), 'tmp.out5');
 }
