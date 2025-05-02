@@ -248,3 +248,16 @@
 -  std: ^2025.502.2210
 +  std: ^2025.502.2329
 ```
+
+## 2025.503.6
+
+- Added adjustPackageName(String name)
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.502.2337
++version: 2025.503.6
+-  std: ^2025.502.2329
++  std: ^2025.502.2358
+```

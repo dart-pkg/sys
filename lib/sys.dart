@@ -150,6 +150,13 @@ String installBinaryToTempDir(
   return std_std.installBinaryToTempDir(bytes, prefix: prefix, suffix: suffix);
 }
 
+String adjustPackageName(String name) {
+  return std_std.adjustPackageName(name);
+}
+
+/***** Original Implementation of sys package *****/
+
+///
 Future<String?> httpGetBodyAsync(String $urlString) async {
   try {
     var url = Uri.parse($urlString);

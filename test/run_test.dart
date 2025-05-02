@@ -54,5 +54,11 @@ void main() {
         sys_sys.installBinaryToTempDir(bytes, prefix: 'test-', suffix: '.txt'),
       );
     });
+    test('adjustPackageName()', () {
+      echo(sys_sys.adjustPackageName('abc.xyz'));
+      echo(sys_sys.adjustPackageName('abc..xyz'));
+      echo(sys_sys.adjustPackageName('abc-xyz'));
+      echo(sys_sys.adjustPackageName('abc-xyzあいう'));
+    });
   });
 }
