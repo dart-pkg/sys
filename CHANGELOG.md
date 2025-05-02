@@ -186,3 +186,23 @@
 -  std: ^2025.430.2138
 +  std: ^2025.501.843
 ```
+
+## 2025.502.2143
+
+- Added: uuidTimeBased(), uuidRandom(), uuidForNamespace(String ns), sha512(Uint8List bytes), installBinaryToTempDir(Uint8List bytes, {String prefix = '', suffix = '', int trial = 0})
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.501.850
++version: 2025.502.2143
++  crypto: ^3.0.6
++  debug_output: ^2025.502.2007
+-  std: ^2025.501.843
++  path: ^1.9.1
++  std: ^2025.502.2031
++  uuid: ^4.5.1
+-  lints: ^5.1.1
+-  output: ^2025.430.1731
++  lints: ^5.1.1
+```

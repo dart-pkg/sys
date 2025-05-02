@@ -1,12 +1,13 @@
+import 'dart:convert' as dart_convert;
+import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:output/output.dart';
-import 'package:sys/sys.dart' as sys;
-//import 'package:path/path.dart' as path;
+import 'package:debug_output/debug_output.dart';
+import 'package:sys/sys.dart' as sys_sys;
 
 void main() {
   group('Run', () {
     test('run1', () async {
-      echo(sys.timeBasedVersionString());
+      echo(sys_sys.timeBasedVersionString());
       // dump(sys.pathBaseName('abc.xyz.exe'));
       // dump(sys.pathExtension('abc.xyz.exe'));
       // dump(sys.pathFiles('xyz'));
@@ -25,7 +26,7 @@ void main() {
       //   ),
       // );
       //await sys.runAsync('dir /w');
-      int code = await sys.runAsync$(
+      int code = await sys_sys.runAsync$(
         [
           'dart',
           'pub',
@@ -41,10 +42,16 @@ void main() {
         useBash: true,
         autoQuote: false,
       );
-      echo(code, 'code');
-      await sys.runAsync(
+      echo(code, title: 'code');
+      await sys_sys.runAsync(
         'dart pub deps --no-dev --style list | sed "/^ .*/d"',
         useBash: true,
+      );
+    });
+    test('installBinaryToTempDir()', () {
+      Uint8List bytes = dart_convert.utf8.encode('abcハロー©');
+      echo(
+        sys_sys.installBinaryToTempDir(bytes, prefix: 'test-', suffix: '.txt'),
       );
     });
   });
