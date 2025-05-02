@@ -261,3 +261,14 @@
 -  std: ^2025.502.2329
 +  std: ^2025.502.2358
 ```
+
+## 2025.503.56
+
+- Added reformatUglyYaml(String yaml) and reformatUglyYamlFile(String yamlPath)
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.503.6
++version: 2025.503.56
+```

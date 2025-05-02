@@ -157,6 +157,33 @@ String adjustPackageName(String name) {
 /***** Original Implementation of sys package *****/
 
 ///
+String reformatUglyYaml(String yaml) {
+  List<String> lines1 = textToLines(yaml);
+  List<String> lines2 = <String>[];
+  for (int i = 0; i < lines1.length; i++) {
+    if (i > 0) {
+      if (lines1[i] == '' && lines1[i - 1] == '') {
+        continue;
+      }
+    }
+    lines2.add(lines1[i]);
+  }
+  yaml = lines2.join('\n');
+  if (yaml.endsWith('\n\n')) {
+    yaml = yaml.substring(0, yaml.length - 1);
+  } else if (!yaml.endsWith('\n')) {
+    yaml += '\n';
+  }
+  return yaml;
+}
+
+///
+void reformatUglyYamlFile(String yamlPath) {
+  String yaml = readFileString(yamlPath);
+  writeFileString(yamlPath, reformatUglyYaml(yaml));
+}
+
+///
 Future<String?> httpGetBodyAsync(String $urlString) async {
   try {
     var url = Uri.parse($urlString);
