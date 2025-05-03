@@ -283,3 +283,16 @@
 -version: 2025.503.56
 +version: 2025.503.117
 ```
+
+## 2025.504.647
+
+- Fixed a bug of pathExpand()
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.503.117
++version: 2025.504.647
+-  std: ^2025.502.2358
++  std: ^2025.504.612
+```

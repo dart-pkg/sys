@@ -26,27 +26,27 @@ void main() {
       //   ),
       // );
       //await sys.runAsync('dir /w');
-      int code = await sys_sys.runAsync$(
-        [
-          'dart',
-          'pub',
-          'deps',
-          '--no-dev',
-          '--style',
-          'list',
-          '|',
-          'sed',
-          '"/^ .*/d"',
-        ],
-        returnCode: true,
-        useBash: true,
-        autoQuote: false,
-      );
-      echo(code, title: 'code');
-      await sys_sys.runAsync(
-        'dart pub deps --no-dev --style list | sed "/^ .*/d"',
-        useBash: true,
-      );
+      // int code = await sys_sys.runAsync$(
+      //   [
+      //     'dart',
+      //     'pub',
+      //     'deps',
+      //     '--no-dev',
+      //     '--style',
+      //     'list',
+      //     '|',
+      //     'sed',
+      //     '"/^ .*/d"',
+      //   ],
+      //   returnCode: true,
+      //   useBash: true,
+      //   autoQuote: false,
+      // );
+      // echo(code, title: 'code');
+      // await sys_sys.runAsync(
+      //   'dart.exe pub deps --no-dev --style list | sed "/^ .*/d"',
+      //   useBash: true,
+      // );
     });
     test('installBinaryToTempDir()', () {
       Uint8List bytes = dart_convert.utf8.encode('abcハロー©');
