@@ -296,3 +296,16 @@
 -  std: ^2025.502.2358
 +  std: ^2025.504.612
 ```
+
+## 2025.504.1149
+
+- Added 'String get pathOfUserDir'
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.504.647
++version: 2025.504.1149
+-  std: ^2025.504.612
++  std: ^2025.504.1143
+```

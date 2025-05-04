@@ -63,6 +63,10 @@ String get pathOfTempDir {
   return std_std.pathOfTempDir;
 }
 
+String get pathOfUserDir {
+  return std_std.pathOfUserDir;
+}
+
 Uint8List readFileBytes(String path) {
   return std_std.readFileBytes(path);
 }
