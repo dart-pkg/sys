@@ -309,3 +309,16 @@
 -  std: ^2025.504.612
 +  std: ^2025.504.1143
 ```
+
+## 2025.504.1255
+
+- Added pathJoin(List<String> parts)
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.504.1149
++version: 2025.504.1255
+-  std: ^2025.504.1143
++  std: ^2025.504.1244
+```

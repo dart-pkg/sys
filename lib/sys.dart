@@ -19,6 +19,10 @@ String pathExpand(String path) {
   return std_std.pathExpand(path);
 }
 
+String pathJoin(List<String> parts) {
+  return std_std.pathJoin(parts);
+}
+
 void setCwd(String path) {
   std_std.setCwd(path);
 }
