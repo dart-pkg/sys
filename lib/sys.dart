@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http_http;
 import 'package:std/std.dart' as std_std;
 import 'package:archive/archive.dart' as archive_archive;
 //import 'package:debug_output/debug_output.dart';
+export 'package:std/command_runner.dart' show CommandRunner;
 
 bool get isInDebugMode {
   return std_std.isInDebugMode;

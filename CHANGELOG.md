@@ -322,3 +322,18 @@
 -  std: ^2025.504.1143
 +  std: ^2025.504.1244
 ```
+
+## 2025.513.437
+
+- Added class CommandRunner from std/commaond_runner.dart
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.504.1255
++version: 2025.513.437
+-  http: ^1.3.0
++  http: ^1.4.0
+-  debug_output: ^2025.502.2007
++  debug_output: ^2025.504.1731
+```
