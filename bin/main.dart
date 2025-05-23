@@ -2,7 +2,7 @@
 
 import 'package:sys/sys.dart';
 
-main() {
+void main() {
   unzipToDirectory('test.zip', 'tmp.out1/');
   unzipToDirectory(readFileBytes('test.zip'), 'tmp.out2/');
   //unzipToDirectory(123, 'tmp.out3/');
