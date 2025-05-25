@@ -354,3 +354,16 @@
 -  lints: ^5.1.1
 +  lints: ^6.0.0
 ```
+
+## 2025.525.2335
+
+- Update dependencies
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.523.1959
++version: 2025.525.2335
+-  std: ^2025.523.1954
++  std: ^2025.525.1954
+```
